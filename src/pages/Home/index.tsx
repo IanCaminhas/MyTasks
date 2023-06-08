@@ -11,17 +11,24 @@ import {
 
 export const Home = () => {
   /*
+    Anotações gerais
     <TouchableOpacity activeOpacity={0.7}>
     Nível de transparência é o activeOpacity. 0 é nada e 1 é 100%
     0.7 é o nível de transparência a cada toque.
     Se eu colocar 0, some e aparece de novo.
     1 não tem transparência
   */
+
+  //Recebe o valor do input. o valor inicial é uma string vazia('')
+  //O valor digitado seja armazenado no newTask
+  const [newTask, setNewtask] = React.useState('');
+
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.container}>
         <Text style={styles.title}>Welcome, Dev!</Text>
         <TextInput
+          onChangeText={setNewtask} //metodo que setta um novo valor para o estado
           placeholderTextColor="#555" //cor do placeholder
           placeholder="Nova tarefa..." //texto do placeholder
           style={styles.input}
@@ -29,7 +36,6 @@ export const Home = () => {
         <TouchableOpacity activeOpacity={0.7} style={styles.button}>
           <Text style={styles.buttonText}>Adicionar</Text>
         </TouchableOpacity>
-
         <Text style={styles.titleTasks}>Minhas Tarefas</Text>
       </View>
     </SafeAreaView>
