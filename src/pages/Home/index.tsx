@@ -7,7 +7,13 @@ import {
   View,
   StyleSheet,
   SafeAreaView,
+  FlatList,
 } from 'react-native';
+
+interface Task {
+  id: string;
+  title: string;
+}
 
 export const Home = () => {
   /*
@@ -17,11 +23,35 @@ export const Home = () => {
     0.7 é o nível de transparência a cada toque.
     Se eu colocar 0, some e aparece de novo.
     1 não tem transparência
+
+    Isso aqui era abaixo do botão
+        {tasks.map(task => (
+            //Para cada task, é necessário informar um id. Esse id é necessário quando uso um map
+            //TouchableOpacity foi usado para gerar uma ação quando o usuário clicar
+            <TouchableOpacity key={task.id} style={styles.buttonTask}>
+              <Text style={styles.titleTask}>{task.title}</Text>
+            </TouchableOpacity>
+          ))}
   */
 
   //Recebe o valor do input. o valor inicial é uma string vazia('')
   //O valor digitado seja armazenado no newTask
   const [newTask, setNewtask] = React.useState('');
+
+  //Criar um estado para armazenar a lista de tarefas. A cada tarefa que o usuário for adcionando, listar elas abaixo do botão.
+  //Ele começa com um array vazio
+  //o useState recebe um tipo de informação. Uso generics para isso. Recebo um array de tasks
+  const [tasks, setTasks] = React.useState<Task[]>([]);
+
+  //Ao clicar no botão adicionar,eu quero pegar o que foi digitado e incluo na lista. Ou seja, no estado tasks
+  const handleAddNewTask = () => {
+    const data = {
+      id: String(new Date().getTime()), //pegando o instante em segundos, garantindo unicidade
+      title: newTask ? newTask : 'Task empty',
+    };
+    //Vou pegar as tasks já existentes e incluir o obj data para esse array. O três ... é o spread operator e serve para isso
+    setTasks([...tasks, data]);
+  };
 
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -33,10 +63,25 @@ export const Home = () => {
           placeholder="Nova tarefa..." //texto do placeholder
           style={styles.input}
         />
-        <TouchableOpacity activeOpacity={0.7} style={styles.button}>
+        <TouchableOpacity
+          onPress={handleAddNewTask} //função chamada quando o botao é acionado. Como não preciso passar parametro, chamo o método sem os parênteses
+          activeOpacity={0.7}
+          style={styles.button}>
           <Text style={styles.buttonText}>Adicionar</Text>
         </TouchableOpacity>
         <Text style={styles.titleTasks}>Minhas Tarefas</Text>
+
+        <FlatList
+          data={tasks} //isso aqui é estado. É a lista de tasks
+          keyExtractor={item => item.id} //isso aqui é a key. No caso é o id de cada task
+          renderItem={(
+            {item}, //o próprio flatList controla o que vai ser renderizado. Ele só vai alocar espaço em memória daquilo que está visível no momento
+          ) => (
+            <TouchableOpacity key={item.id} style={styles.buttonTask}>
+              <Text style={styles.titleTask}>{item.title}</Text>
+            </TouchableOpacity>
+          )}
+        />
       </View>
     </SafeAreaView>
   );
@@ -92,5 +137,17 @@ const styles = StyleSheet.create({
     color: '#121214', //cor do texto do botão
     fontSize: 18, //tamanho do botão do texto
     fontWeight: 'bold', //Negrito
+  },
+  buttonTask: {
+    backgroundColor: '#29292e',
+    padding: 10,
+    marginTop: 10,
+    borderRadius: 50,
+    alignItems: 'center',
+  },
+  titleTask: {
+    color: '#f1f1f1',
+    fontSize: 20,
+    fontWeight: 'bold',
   },
 });
