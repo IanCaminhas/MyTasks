@@ -1,11 +1,19 @@
 import React from 'react';
-import {Text, View, StyleSheet, SafeAreaView} from 'react-native';
+import {
+  Platform,
+  Text,
+  TextInput,
+  View,
+  StyleSheet,
+  SafeAreaView,
+} from 'react-native';
 
 export const Home = () => {
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.container}>
         <Text style={styles.title}>Welcome, Dev!</Text>
+        <TextInput style={styles.input} />
       </View>
     </SafeAreaView>
   );
@@ -24,16 +32,24 @@ const styles = StyleSheet.create({
     backgroundColor: '#121214',
   },
   container: {
-    flex: 1,
-    backgroundColor: '#121214',
+    flex: 1, //ocupa 100% da tela.
+    backgroundColor: '#121214', //cor de fundo
     paddingHorizontal: 30, //afastamento para a esquerda. Da borda para a esquerda
     paddingVertical: 50, //afastamento do topo para baixo
-    //justifyContent: 'center', só mesmo para teste e visualização
-    //alignItems: 'center', só mesmo para teste e visualização
+    //justifyContent: 'center', só mesmo para teste e visualização  Alinhamento no centro,mas fica grudado à esquerda
+    //alignItems: 'center', só mesmo para teste e visualização fica no centro da tela.
   },
   title: {
     color: '#f1f1f1',
     fontSize: 24,
     fontWeight: 'bold',
+  },
+  input: {
+    backgroundColor: '#29292e', //cor de fundo do input
+    color: '#f1f1f1', //cor do texto
+    fontSize: 18, //tamanho do texto
+    padding: Platform.OS === 'ios' ? 15 : 12, //tamanho da caixa de texto. Se for para ios tamanho 15, senão tamanho 10. De acordo com a plataforma, uso valores diferentes
+    marginTop: 30, //distância entre o label e a caixa de texto(input)
+    borderRadius: 7, //Curvatura da borda
   },
 });
