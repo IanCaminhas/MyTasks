@@ -3,17 +3,28 @@ import {
   Platform,
   Text,
   TextInput,
+  TouchableOpacity,
   View,
   StyleSheet,
   SafeAreaView,
 } from 'react-native';
 
 export const Home = () => {
+  /*
+    <TouchableOpacity activeOpacity={0.7}>
+    Nível de transparência é o activeOpacity. 0 é nada e 1 é 100%
+    0.7 é o nível de transparência a cada toque.
+    Se eu colocar 0, some e aparece de novo.
+    1 não tem transparência
+  */
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.container}>
         <Text style={styles.title}>Welcome, Dev!</Text>
         <TextInput style={styles.input} />
+        <TouchableOpacity activeOpacity={0.7} style={styles.button}>
+          <Text style={styles.buttonText}>Adicionar</Text>
+        </TouchableOpacity>
       </View>
     </SafeAreaView>
   );
@@ -51,5 +62,17 @@ const styles = StyleSheet.create({
     padding: Platform.OS === 'ios' ? 15 : 12, //tamanho da caixa de texto. Se for para ios tamanho 15, senão tamanho 10. De acordo com a plataforma, uso valores diferentes
     marginTop: 30, //distância entre o label e a caixa de texto(input)
     borderRadius: 7, //Curvatura da borda
+  },
+  button: {
+    backgroundColor: '#eba417', //cor do botão
+    padding: 15, //tamanho do botão
+    borderRadius: 7, //curvatura da borda
+    alignItems: 'center', //posição do texto no botão
+    marginTop: 20, //distância entre a caixa de texto e o botão
+  },
+  buttonText: {
+    color: '#121214', //cor do texto do botão
+    fontSize: 18, //tamanho do botão do texto
+    fontWeight: 'bold', //Negrito
   },
 });
