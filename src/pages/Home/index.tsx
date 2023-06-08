@@ -7,8 +7,8 @@ import {
   View,
   StyleSheet,
   SafeAreaView,
-  FlatList,
 } from 'react-native';
+import {TaskList} from '../../components/TaskList';
 
 interface Task {
   id: string;
@@ -32,6 +32,22 @@ export const Home = () => {
               <Text style={styles.titleTask}>{task.title}</Text>
             </TouchableOpacity>
           ))}
+    Exemplo: não consigo passar newTask para outro componente. newTask só pega dentro de home. Solução: Context API ou via propriedade(não muito legal)
+    const [newTask, setNewtask] = React.useState('');
+
+    Esse trecho era dessa página. Foi transformado num componente à parte
+     <FlatList
+          data={tasks} //isso aqui é estado. É a lista de tasks
+          keyExtractor={item => item.id} //isso aqui é a key. No caso é o id de cada task
+          renderItem={(
+            {item}, //o próprio flatList controla o que vai ser renderizado. Ele só vai alocar espaço em memória daquilo que está visível no momento
+          ) => (
+            <TouchableOpacity key={item.id} style={styles.buttonTask}>
+              <Text style={styles.titleTask}>{item.title}</Text>
+            </TouchableOpacity>
+          )}
+        />
+
   */
 
   //Recebe o valor do input. o valor inicial é uma string vazia('')
@@ -71,17 +87,7 @@ export const Home = () => {
         </TouchableOpacity>
         <Text style={styles.titleTasks}>Minhas Tarefas</Text>
 
-        <FlatList
-          data={tasks} //isso aqui é estado. É a lista de tasks
-          keyExtractor={item => item.id} //isso aqui é a key. No caso é o id de cada task
-          renderItem={(
-            {item}, //o próprio flatList controla o que vai ser renderizado. Ele só vai alocar espaço em memória daquilo que está visível no momento
-          ) => (
-            <TouchableOpacity key={item.id} style={styles.buttonTask}>
-              <Text style={styles.titleTask}>{item.title}</Text>
-            </TouchableOpacity>
-          )}
-        />
+        <TaskList tasks={tasks} />
       </View>
     </SafeAreaView>
   );
