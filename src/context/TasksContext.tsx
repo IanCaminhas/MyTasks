@@ -10,6 +10,6 @@ export interface ITasksContext {
 Colocamos {} como default value...O typescript não suporta. Como contormar isso ?
 falando que {} é do tipo ITasksContext... Isso aqui é para forçar a barra
 */
-export const TasksContent = React.createContext<ITasksContext>(
+export const TasksContext = React.createContext<ITasksContext>(
   {} as ITasksContext,
 );

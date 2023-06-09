@@ -1,6 +1,6 @@
 import React from 'react';
 import {Home} from './src/pages/Home';
-import {TasksContent} from './src/context/tasksContent';
+import {TasksContext} from './src/context/TasksContext';
 
 const App = () => {
   /*
@@ -10,9 +10,9 @@ const App = () => {
       Aí o componente <Home/> vai ter acesso
   */
   return (
-    <TasksContent.Provider value={{id: '1', title: 'Task01'}}>
+    <TasksContext.Provider value={{id: '1', title: 'Task01'}}>
       <Home />
-    </TasksContent.Provider>
+    </TasksContext.Provider>
   );
 };
 

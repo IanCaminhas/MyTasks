@@ -9,11 +9,13 @@ import {
   SafeAreaView,
 } from 'react-native';
 import {TaskList} from '../../components/TaskList';
-
+import {TasksContext} from '../../context/TasksContext';
+/*
 interface Task {
   id: string;
   title: string;
 }
+*/
 
 export const Home = () => {
   /*
@@ -54,10 +56,13 @@ export const Home = () => {
   //O valor digitado seja armazenado no newTask
   const [newTask, setNewtask] = React.useState('');
 
-  //Criar um estado para armazenar a lista de tarefas. A cada tarefa que o usuário for adcionando, listar elas abaixo do botão.
-  //Ele começa com um array vazio
-  //o useState recebe um tipo de informação. Uso generics para isso. Recebo um array de tasks
-  const [tasks, setTasks] = React.useState<Task[]>([]);
+  /*Criar um estado para armazenar a lista de tarefas. A cada tarefa que o usuário for adcionando, listar elas abaixo do botão.
+    Ele começa com um array vazio
+    o useState recebe um tipo de informação. Uso generics para isso. Recebo um array de tasks
+    const [tasks, setTasks] = React.useState<Task[]>([]); Isso aqui era passado via props. Nao e mais. Agora usamos context e useContext*/
+
+  const tasks = React.useContext(TasksContext);
+  //console.log(tasks);
 
   //Ao clicar no botão adicionar,eu quero pegar o que foi digitado e incluo na lista. Ou seja, no estado tasks
   const handleAddNewTask = () => {
@@ -65,8 +70,14 @@ export const Home = () => {
       id: String(new Date().getTime()), //pegando o instante em segundos, garantindo unicidade
       title: newTask ? newTask : 'Task empty',
     };
-    //Vou pegar as tasks já existentes e incluir o obj data para esse array. O três ... é o spread operator e serve para isso
-    setTasks([...tasks, data]);
+
+    /*Vou pegar as tasks já existentes e incluir o obj data para esse array. O três ... é o spread operator e serve para isso
+    setTasks([...tasks, data]); não preciso desse estado mais. Estou pegando tudo via context
+    Isso era usado em conjunto com  const [tasks, setTasks] = React.useState<Task[]>([]);
+
+    usava isso aqui em baixo também:
+     <TaskList tasks={tasks} /> Não vou usar mais, pois agora estou pegando via context
+    */
   };
 
   return (
@@ -87,7 +98,7 @@ export const Home = () => {
         </TouchableOpacity>
         <Text style={styles.titleTasks}>Minhas Tarefas</Text>
 
-        <TaskList tasks={tasks} />
+        <TaskList />
       </View>
     </SafeAreaView>
   );

@@ -1,6 +1,8 @@
 import React from 'react';
 import {FlatList, StyleSheet, Text, TouchableOpacity} from 'react-native';
+import {ITasksContext, TasksContext} from '../../context/TasksContext';
 
+/*
 interface Task {
   id: string;
   title: string;
@@ -10,11 +12,18 @@ interface Task {
 interface TaskListProps {
   tasks: Task[];
 }
+Antes tinha a tipagem:
+TaskList = ({tasks}: TaskListProps) => Não preciso mais, pois agora pego via Context
+*/
 
-export const TaskList = ({tasks}: TaskListProps) => {
+export const TaskList = () => {
+  //Essa informação é global, pego ela via context
+  const tasks = React.useContext(TasksContext);
+
   return (
     <FlatList
-      data={tasks}
+      //se eu colocar só tasks, fica ando erro. Tenho que forçar uma tipagem. No caso usei o unknow. Forcei o unknow tbm falando que é do tipo ITasksContext[]
+      data={tasks as unknown as ITasksContext[]}
       keyExtractor={item => item.id}
       renderItem={({item}) => (
         <TouchableOpacity key={item.id} style={styles.buttonTask}>
