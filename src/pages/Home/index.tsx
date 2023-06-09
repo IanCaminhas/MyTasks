@@ -61,7 +61,7 @@ export const Home = () => {
     o useState recebe um tipo de informação. Uso generics para isso. Recebo um array de tasks
     const [tasks, setTasks] = React.useState<Task[]>([]); Isso aqui era passado via props. Nao e mais. Agora usamos context e useContext*/
 
-  const tasks = React.useContext(TasksContext);
+  const {addTask} = React.useContext(TasksContext);
   //console.log(tasks);
 
   //Ao clicar no botão adicionar,eu quero pegar o que foi digitado e incluo na lista. Ou seja, no estado tasks
@@ -70,6 +70,8 @@ export const Home = () => {
       id: String(new Date().getTime()), //pegando o instante em segundos, garantindo unicidade
       title: newTask ? newTask : 'Task empty',
     };
+    //Esse addTask foi importado lá do contexto... Api Context
+    addTask();
 
     /*Vou pegar as tasks já existentes e incluir o obj data para esse array. O três ... é o spread operator e serve para isso
     setTasks([...tasks, data]); não preciso desse estado mais. Estou pegando tudo via context
