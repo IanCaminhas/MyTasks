@@ -8,6 +8,10 @@ import App from '../App';
 it('renders correctly', () => {
   //Vou testar a renderização do app
   //olha o tanto de coisas que posso usar do render. Estou desestruturando
+  /*
+    Dentro do render, temos alguns recursos interessantes. Podemos pegar um debugger.
+    O debugger vai fazer um print de toda a estrutura hierárquica dos componentes que são renderizados.
+  */
   const {debug} = render(<App />);
 
   debug();
