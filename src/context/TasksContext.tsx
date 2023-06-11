@@ -67,3 +67,14 @@ export const TasksProvider: React.FunctionComponent<IProps> = ({
     </TasksContext.Provider>
   );
 };
+
+export function useTaskList(): ITasksContext {
+  const context = React.useContext(TasksContext);
+
+  //Esse useTaskList(Hook) só pode ser chamado num componente que estiver dentro de um provider
+  if (!context) {
+    throw new Error('useTaskList deve ser usado em um tasksProvider');
+  }
+
+  return context;
+}

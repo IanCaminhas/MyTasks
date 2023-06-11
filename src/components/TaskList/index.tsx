@@ -1,6 +1,6 @@
 import React from 'react';
 import {FlatList, StyleSheet, Text, TouchableOpacity} from 'react-native';
-import {ITask, TasksContext} from '../../context/TasksContext';
+import {ITask, useTaskList} from '../../context/TasksContext';
 
 /*
 interface Task {
@@ -17,8 +17,8 @@ TaskList = ({tasks}: TaskListProps) => Não preciso mais, pois agora pego via Co
 */
 
 export const TaskList = () => {
-  //Essa informação é global, pego ela via context
-  const tasks = React.useContext(TasksContext);
+  //Essa informação é global, pego ela de context/TaskContext
+  const tasks = useTaskList();
 
   return (
     <FlatList

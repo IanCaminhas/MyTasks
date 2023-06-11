@@ -9,7 +9,7 @@ import {
   SafeAreaView,
 } from 'react-native';
 import {TaskList} from '../../components/TaskList';
-import {TasksContext} from '../../context/TasksContext';
+import {useTaskList} from '../../context/TasksContext';
 /*
 interface Task {
   id: string;
@@ -55,6 +55,8 @@ export const Home = () => {
   //Recebe o valor do input. o valor inicial é uma string vazia('')
   //O valor digitado seja armazenado no newTask
   const [newTask, setNewtask] = React.useState('');
+  //const {addTask} = React.useContext(TasksContext);
+  const {addTask} = useTaskList(); //isso foi uma refatoração... foi passado por context/TasksContent
 
   /*Criar um estado para armazenar a lista de tarefas. A cada tarefa que o usuário for adcionando, listar elas abaixo do botão.
     Ele começa com um array vazio
@@ -170,10 +172,3 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
 });
-function addTask(data: {
-  id: string; //pegando o instante em segundos, garantindo unicidade
-  title: string;
-}) {
-  throw new Error('Function not implemented.');
-}
-
