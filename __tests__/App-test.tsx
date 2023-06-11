@@ -1,14 +1,14 @@
-/**
- * @format
- */
-
 import 'react-native';
 import React from 'react';
+import {render} from '@testing-library/react-native';
 import App from '../App';
 
-// Note: test renderer must be required after react-native.
-import renderer from 'react-test-renderer';
-
+//Instrução do Jest para a criação de cada teste na aplicação. Posso it ou test. Todos os dois fazem a mesma coisa.
+//Passamos dois parâmetros: nome do teste('renders correctly') e uma função
 it('renders correctly', () => {
-  renderer.create(<App />);
+  //Vou testar a renderização do app
+  //olha o tanto de coisas que posso usar do render. Estou desestruturando
+  const {debug} = render(<App />);
+
+  debug();
 });
