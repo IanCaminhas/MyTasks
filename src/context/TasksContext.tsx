@@ -11,9 +11,11 @@ export interface ITask {
 }
 
 //O tipo de informação que vai ter o contexto
+//Isso fical global na aplicação
 export interface ITasksContext {
   tasks: ITask[];
   addTask(task: ITask): void; //método para adicionar tarefa ao contexto.
+  removeTask(id: string): void; //método para remover uma tarefa do contexto.
 }
 
 //'@MyTasks:Tasks' é a chave. @MyTasks - nome da aplicação.... :Tasks -> a chave que vai estar sendo armazenada
@@ -56,13 +58,21 @@ export const TasksProvider: React.FunctionComponent<IProps> = ({
     }
   };
 
+  const removeTask = async (id: string) => {
+    //de data, não passar a task igual do id que foi passado. Assim, um novo array de tasks é passado sem a task removida
+    const newTaskList = data.filter(task => task.id != id);
+    setData(newTaskList);
+    //atualizando o AsyncStorage... Agora o item está removido da lista
+    await AsyncStorage.setItem(tasksData, JSON.stringify(newTaskList));
+  };
+
   //const tasks = [{id: '1', title: 'Task01'}];
 
   /*children são os componentes filhos recebidos via props... Assim, os outros componentes não
   tem acesso às implementações do Context.
   */
   return (
-    <TasksContext.Provider value={{tasks: data, addTask}}>
+    <TasksContext.Provider value={{tasks: data, addTask, removeTask}}>
       {children}
     </TasksContext.Provider>
   );
