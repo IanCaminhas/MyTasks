@@ -1,6 +1,6 @@
 import React from 'react';
 import {FlatList, StyleSheet, Text, TouchableOpacity} from 'react-native';
-import {ITasksContext, TasksContext} from '../../context/TasksContext';
+import {ITask, TasksContext} from '../../context/TasksContext';
 
 /*
 interface Task {
@@ -22,8 +22,9 @@ export const TaskList = () => {
 
   return (
     <FlatList
-      //se eu colocar só tasks, fica ando erro. Tenho que forçar uma tipagem. No caso usei o unknow. Forcei o unknow tbm falando que é do tipo ITasksContext[]
-      data={tasks as unknown as ITasksContext[]}
+      /*se eu colocar só tasks, fica ando erro. Tenho que forçar uma tipagem. No caso usei o unknow. Forcei o unknow tbm falando que é do tipo ITasksContext[]
+      data={tasks as unknown as ITasksContext[]} */
+      data={tasks as unknown as ITask[]}
       keyExtractor={item => item.id}
       renderItem={({item}) => (
         <TouchableOpacity key={item.id} style={styles.buttonTask}>
