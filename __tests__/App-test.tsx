@@ -14,5 +14,5 @@ it('renders correctly', () => {
   */
   const {debug} = render(<App />);
 
-  debug();
+  //debug();
 });
