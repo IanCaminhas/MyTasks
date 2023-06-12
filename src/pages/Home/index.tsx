@@ -49,7 +49,6 @@ export const Home = () => {
             </TouchableOpacity>
           )}
         />
-
   */
 
   //Recebe o valor do input. o valor inicial é uma string vazia('')

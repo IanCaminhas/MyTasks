@@ -49,7 +49,7 @@ export const TasksProvider: React.FunctionComponent<IProps> = ({
   const addTask = async (task: ITask) => {
     // console.log('addTask action.');
     try {
-      //...data significa para pegar os mesmes elementos e acrescentar task(nova task)
+      //...data significa para pegar os mesmos elementos e acrescentar task(nova task)
       const newTaskList = [...data, task];
       setData(newTaskList);
       await AsyncStorage.setItem(tasksData, JSON.stringify(newTaskList));
