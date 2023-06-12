@@ -12,7 +12,6 @@ it('renders correctly', () => {
     Dentro do render, temos alguns recursos interessantes. Podemos pegar um debugger.
     O debugger vai fazer um print de toda a estrutura hierárquica dos componentes que são renderizados.
   */
-  const {debug} = render(<App />);
-
+  //const {debug} = render(<App />);
   //debug();
 });
