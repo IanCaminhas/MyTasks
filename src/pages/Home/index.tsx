@@ -94,6 +94,7 @@ export const Home = () => {
           style={styles.input}
         />
         <TouchableOpacity
+          testID="addButton" //através desse nome, pego esse componente lá no teste.
           onPress={handleAddNewTask} //função chamada quando o botao é acionado. Como não preciso passar parametro, chamo o método sem os parênteses
           activeOpacity={0.7}
           style={styles.button}>
