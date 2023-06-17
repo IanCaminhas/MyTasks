@@ -16,5 +16,13 @@ module.expors = {
     "jsx",
     "json",
     "node"
-  ]
+  ],
+  //coverage reports
+  collectCoverage: true,
+  collectCoverageFrom: [
+    "src/**/*.tsx", //o que considerar para montar o relatório ? qualquer subpasta(/** */)... em qualquer arquivo(/*.tsx) com extensão .tsx
+    "!src/**/*.spec.tsx"//Não vai pegar/considerar arquivos de testes.
+  ],
+  coverageReporters: ["lcov"] //tipo de relatório a ser criado
+
 }
