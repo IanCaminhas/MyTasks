@@ -42,6 +42,13 @@ describe('Home page', () => {
   it('verifica se o clique no botão insere um item na lista de tarefas', async () => {
     /*Passando o provider por volta do componente. O componente tbm precisa ficar
     dentro de um provider para que conseguimos manipular o contexto no teste
+
+    const {getByPlaceholderText, getByTestId} = render(<Home />, {
+      wrapper: TasksProvider,
+    });
+
+    {getByPlaceholderText, getByTestId} é usado quando vamos testar algo de dentro do componente
+    É usado quando precisamos passar algo no componente
     */
     const {getByPlaceholderText, getByTestId} = render(<Home />, {
       wrapper: TasksProvider,
